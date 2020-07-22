@@ -186,6 +186,7 @@ $ yarn add dotenv
 **.env** file
 ```
 GITHUB_LOGIN=your_github_login
+GITHUB_PERSONAL_ACCESS_TOKEN=your_github_personal_access_token
 ```
 
 ## Install and configure Gatsby Plugin for pulling data from Github GraphQL API
@@ -213,7 +214,7 @@ plugins: [
       url: "https://api.github.com/graphql", // default Github GraphQL v4 API endpoint
 
       // token: required by the GitHub API
-      token: "YOUR_PERSONAL_ACCESS_TOKEN_FROM_GITHUB_HERE",
+      token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
 
       // GraphQLquery: defaults to a search query
       graphQLQuery: githubApiQuery,

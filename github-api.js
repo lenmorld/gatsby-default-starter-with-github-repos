@@ -34,17 +34,3 @@ query($github_login: String!) {
 		}
 }
 `
-
-/*
-        query {
-          repository(owner:"torvalds",name:"linux"){
-            description
-          }
-        }
-        `,
-*/
-
-/*
-
-(first: 30, orderBy: {field: STARGAZERS, direction: DESC})
-*/

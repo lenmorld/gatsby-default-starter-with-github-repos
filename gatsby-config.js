@@ -40,7 +40,7 @@ module.exports = {
         // url: someUrl,
 
         // token: required by the GitHub API
-        token: "74846e6d19fc10d1a7ab1cda73b199459dd05f59",
+        token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
 
         // GraphQLquery: defaults to a search query
         graphQLQuery: githubApiQuery,
