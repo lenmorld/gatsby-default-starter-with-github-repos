@@ -6,17 +6,50 @@ tags: #node, #express, #database, #nosql
 cover_image: 
 ---
 
-Want to show off your Github repositories in your Gatsby site?
+Want to show off your Github repositories in your Gatsby site? 👨‍💼👩‍💼
 
-Even if you don't know GraphQL, this guide shows you how to use the 
-Github GraphQL API v4 to get all the repositories from your Github handle 
-and display it in your site!
+Even if you don't know GraphQL, this guide shows you just enough GraphQL to get you started learning it and using it. 🤓
 
-Let's get into it!
+We'll use Github GraphQL API v4 to get all the repositories from your Github account 
+and display it in your Gatsby site! 📊
+
+Let's get into it! 🏃‍♀️🏃‍♂️
 
 # GraphQL
 
-A GraphQL API allows you to write more detailed queries.
+## Intro to GraphQL
+A GraphQL API allows us to more efficiently create and consume APIs.
+
+For example, we might fetch something like this using REST:
+- GET `/api/:name/projects`
+- GET `/api/:name/projects/:project_id`
+- GET `/api/:name/projects/:project_id/description`
+- GET `/api/:name/projects/:project_id/name`
+- GET `/api/:name/projects/:project_id/watchers`
+- GET `/api/:name/projects/:project_id/watchers/:watcher_id`
+- GET `/api/:name/projects/:project_id/watchers/:watcher_id/name`
+
+In GraphQL, we don't have to "overfetch" and just get all data we need all at once from one endpoint:
+```
+query { 
+  user(name: "myname") { 
+    projects {
+      name
+      description
+      watchers {
+        name
+      }
+    }
+  }
+}
+```
+
+That's just the _tip of the iceberg_ for GraphQL. 🏔 ❄
+For a more detailed guide to GraphQL:
+
+{% link https://dev.to/davinc/graphql-for-beginners-3f1a %}
+
+## Github GraphQL API
 
 Github provides a GraphQL API in their v4 update.
 
@@ -48,7 +81,7 @@ query {
 ...which gets the your Github `login`, `name`, and names of your first 10 repositories.
 The `node` here represent each of the repositories found, which we can get the fields `name` and `description` from.
 
-![Github GraphQL explorer](./screens/github_graphql_explorer.gif)
+![Github GraphQL explorer](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462534/devto/gatsby_graphql_api/github_graphql_explorer.gif)
 
 The nice thing with GraphiQL is that it gives you auto-complete. The docs on the upper-right corner are also super useful.
 
@@ -93,11 +126,11 @@ The nice thing with GraphiQL is that it gives you auto-complete. The docs on the
 }
 ```
 Which gives something like this
-![Get repo details in Github GraphQL explorer](screens/github_graphql_query_get_repo_details.png)
+![Get repo details in Github GraphQL explorer](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462513/devto/gatsby_graphql_api/github_graphql_query_get_repo_details.png)
 
 > See details here on how we got the README contents: [Github Community: GraphQL getting filename,file content and commit date](https://github.community/t/graphql-getting-filename-file-content-and-commit-date/13724/3)
 
-> The `openGraphImageUrl` contains your repo's social media preview, which shows when you post your Github repo on Facebook, Twitter, blog, etc. It can be customized on the Repo settings. Max 1MB for the photo. ![Repo settings social preview](screens/repo_settings_social_preview.png) Photo by [Christian Wiediger](https://unsplash.com/@christianw?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/computers?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)
+> The `openGraphImageUrl` contains your repo's social media preview, which shows when you post your Github repo on Facebook, Twitter, blog, etc. It can be customized on the Repo settings. Max 1MB for the photo. ![Repo settings social preview](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462531/devto/gatsby_graphql_api/repo_settings_social_preview.png) Photo by [Christian Wiediger](https://unsplash.com/@christianw?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/computers?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)
 
 Cool! 😎
 
@@ -122,7 +155,7 @@ To get a personal access token, you'll have to go to Developer Settings and gene
 
 You'll only need repo and user access for this exercise.
 
-![Get personal access token from Github](./screens/github_get_personal_access_token.gif)
+![Get personal access token from Github](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462532/devto/gatsby_graphql_api/github_get_personal_access_token.gif)
 
 ⚠ Copy-paste the personal access token somewhere since it will disappear next time you go to this page! 😱
 
@@ -174,9 +207,16 @@ A GraphQL variable `$github_login` of type String:
 
 > We're using Node syntax since this will be `require`d later in `gatsby-config.js`
 
-## Personal Access Token in .env
+## Put personal Access Token in .env 🔐
 
 Putting plaintext API keys in our config code is not secure! 🕵️‍♂️ 
+
+It's such a bad idea that Github revoked my Personal Access Token as soon as I tried pushing it to a public repo!
+
+![Github email Personal Access Token found in commit](screens/github_email_personal_access_token_leaked.png)
+
+Thanks for forcing me to follow secure practices Github! 🙏
+
 Let's use `dotenv` library and put sensitive keys like this in a `.env` file
 
 ```bash
@@ -248,7 +288,7 @@ Now that it's available from the backend, let's get this data from the UI side!
 
 Fire up local GraphiQL [http://localhost:8000/___graphql](http://localhost:8000/___graphql) to see our Github data
 
-![Local GraphiQL test query](./screens/local_graphiql_test_query.gif)
+![Local GraphiQL test query](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462539/devto/gatsby_graphql_api/local_graphiql_test_query.gif)
 
 Soo nice to use GraphiQL! You can just click away to formulate your query!
 
@@ -346,9 +386,9 @@ export default function Projects() {
   );
 ```
 
-![UI Github Repos Preview](screens/ui_github_repos_preview.png)
+![UI Github Repos Preview](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462520/devto/gatsby_graphql_api/ui_github_repos_preview.png)
 
-![UI Github Repos Preview Console](screens/ui_github_repos_preview_2.png)
+![UI Github Repos Preview Console](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462519/devto/gatsby_graphql_api/ui_github_repos_preview_2.png)
 
 Awesome! 🎉
 
@@ -363,18 +403,36 @@ Some highlights:
 - Social Media Preview image (`openGraphImageUrl`) on the right side
 - liberal use of flexbox 😁
 
-You can view the Project page implementation here:
-[Project component]()
+You can view the Projects view implementation here:
+[Projects view](https://github.com/lenmorld/gatsby-default-starter-with-github-repos/blob/master/src/pages/index.js)
 
-Voila!
+Voila! 💥
 
-![Github repos in Gatsby](./screens/github_repos_in_gatsby.gif)
+![Github repos in Gatsby](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462572/devto/gatsby_graphql_api/github_repos_in_gatsby.gif)
+
+
+# BONUS: Deploy in Netlify
+
+First, push the code to a Github Repo
+
+From your Netlify dashboard, create new site and follow steps to create new site from Github repo
+
+![Netlify config 1](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462518/devto/gatsby_graphql_api/netlify_config_1.png)
+
+The nice thing is that you can specify the enviroment variable here before deploy!
+
+> Remember that we can't commit `.env` to remote sincee that would expose our secrets to the cloud! 😱 So we have to configure the env. variable on our provider, in this case Netlify
+
+![Netlify config 2](https://res.cloudinary.com/dvfhgkkpe/image/upload/v1595462518/devto/gatsby_graphql_api/netlify_config_2.png)
+
+Deploy! 🚀
+
+[Live demo](https://wizardly-yonath-ca537a.netlify.app/)
 
 # Code
 
 Full implementation here built on top of gatsby-default-starter.
 
-[Code]()
-
+[Full Code](https://github.com/lenmorld/gatsby-default-starter-with-github-repos)
 
 Catch you in the next one!
